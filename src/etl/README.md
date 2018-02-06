@@ -1,3 +1,11 @@
+# To run
+Uses Python 3.6.3
+`pip install -r requirements.txt`
+`python etl_main_min_database.py` creates minimal SQLite database.  
+
+Script is intended to create entire database from scratch, thus 
+running 2x in a row will error because database file already exists.  
+
 # Database Specification
 
 ## Philosophy
@@ -7,7 +15,19 @@ Across database, booking data is linked by unique `booking_id`.
 For example, a booking has a county, an inmate, one or more charges & bonds. 
 Each booking also has a timeline; chronological entries in the **Timelines** table. These log all events that happen to the booking and # days jailed when it occurred. 
 
-## Database table specification
+## "Minimal Database" table specification
+The goal of the minimal table is to quickly create a plot to answer the question: "How long are people with misdemeanors in jail before they are released?"
+
+Bookings table | Description
+------------ | -------------
+booking_id | Primary key
+booking_id_string | Concatenated CSV fields to make unique identifiers for each booking, for searching if a booking already exists in database. For example, `inmate_lastname` + `inmate_address` + `booking_timestamp`. The concatenated fields are different for each county!
+county_name | Same as CSV
+booking_timestamp | Same as CSV
+release_timestamp | Same as CSV - both for known releases and if inmate just dropped off roster one day.
+severity_type | `'known misdemeanor'` if every single charge is a misdemeanor. `'known felony'` if at least one charge is a felony (including `misdemeanor&felony` charges). `'unknown'` if one or more charges have blank severity.
+
+## "Full Database" table specification
 All timestamps are in [Postgres timestamp format](https://www.postgresql.org/docs/9.1/static/datatype-datetime.html): `'2004-10-19 10:23:54 EST'`
 
 ![Database tables](../../img/database_tables.png)

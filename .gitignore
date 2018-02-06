@@ -2,3 +2,7 @@
 *.log
 /data/*.csv
 /data/*.pdf
+/data/to_test/*.csv
+/data/to_test/*.pdf
+/data/databases/*.db
+/data/databases/*.csv

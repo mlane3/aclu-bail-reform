@@ -1,20 +1,9 @@
-# Current priorities & timeline
-
-* We are using **Python 3.6**.  
-* **Priority #1** is writing ETL & visualization code throughout Nov/Dec 2017. [Pick an issue related to ETL/visualization](https://github.com/lahoffm/aclu-bail-reform/issues) and post that you want to help, we'll discuss specifics then.
-* **Priority #2** is writing webscrapers for remaining counties, so we can collect daily jail data. [Pick an unclaimed county](https://github.com/lahoffm/aclu-bail-reform/issues) and start scraping!
-* ACLU will lobby at next GA state legislative session starting Jan 2018. Ideally we'll have some visualizations by then. But their bail reform project will be ongoing beyond then.  
+# How you can contribute
+* Next steps are to be determined.
+* Whatever the next steps are, we will want data from more counties. So we need more webscrapers. If you want to write one please comment in the relevant [Issue](https://github.com/lahoffm/aclu-bail-reform/issues).
 * County jail info [here](https://github.com/lahoffm/aclu-bail-reform/blob/master/docs/County-jail-summaries.xlsx)
 * Our Slack channel is **#aclu-bail-reform** at [codeforatlanta.slack.com](https://codeforatlanta.slack.com)
-
-# Contribute to ETL (extract-transform-load)
-* If you want to help, let us know on the [ETL-related Issues](https://github.com/lahoffm/aclu-bail-reform/issues)) or Slack, we can discuss specific parts to work on.
-* The goal of ETL is to extract info from webscraper CSV files, transform it into a nice format (like identifying duplicate information) and load it into a database.
-* Despite some allusions to Postgres we are starting with **SQLite** so you can start coding without installing a bunch of things.
-* Database specification [here](https://github.com/lahoffm/aclu-bail-reform/blob/master/src/etl/README.md)
-
-# Contribute to visualization
-Still working on ETL
+* We are using **Python 3.6.3**.  
 
 # CSV file format for webscrapers
 
@@ -44,7 +33,7 @@ inmate_lastname | Last name
 inmate_firstname | First name
 inmate_middlename | Middle name or initial, if any
 inmate_sex	| ```'m'/'f'```
-inmate_race	| ```'black'/'white'/'hispanic'/'asian'/'middle-eastern'/'native-american'/'pacific-islander'```. Although someone's race/ethnicity is more complicated (and really shouldn't matter anyway) we will stick to the basic categories the counties designated. If you see a category not on this list, please inform us so we can add to the list.
+inmate_race	| ```'black'/'white'/'hispanic'/'asian'/'middle-eastern'/'native-american'/'pacific-islander'/'indian'/'multiracial'/'other'```. Although someone's race/ethnicity is more complicated (and really shouldn't matter anyway) we will stick to the basic categories the counties designated. If you see a category not on this list, please inform us so we can add to the list.
 inmate_age | Age in years. If ```inmate_dob``` only provides the year, just subtract birth year from current year.
 inmate_dob	| Date of birth, [Postgres timestamp format](https://www.postgresql.org/docs/9.1/static/datatype-datetime.html), ```'2004-10-19'```. Some counties only post year of birth.
 inmate_address | Address, including if they list no address. Useful later to see where arrests are clustering. Just insert how the county lists it, ETL code can parse it into standard format later.
